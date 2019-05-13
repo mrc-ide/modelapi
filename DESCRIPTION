@@ -1,0 +1,18 @@
+Package: modelapi
+Title: Example Model as an API
+Version: 0.1.0
+Authors@R:
+    person(given = "Rich",
+           family = "FitzJohn",
+           role = c("aut", "cre"),
+           email = "rich.fitzjohn@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Author: Rich FitzJohn
+Maintainer: Rich FitzJohn <rich.fitzjohn@gmail.com>
+Description: A fake model, exposed as an API.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests:
+    testthat
+RoxygenNote: 6.1.1
