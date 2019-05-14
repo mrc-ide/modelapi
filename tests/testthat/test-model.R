@@ -3,7 +3,7 @@ context("model")
 test_that("run model", {
   inputs <- validate_inputs("a,b\n1,2\n2,3\n3,4\n",
                             list(a = 20, b = 3, time = 0.1, poll = 100))
-  res <- run_model(inputs)
+  res <- model_run(inputs)
   expect_equal(res$fitted, list(a = 40, b = 9))
   expect_equal(res$simulation$t, seq(0, 3, length.out = 20))
   expect_equal(res$simulation$y, sin(res$simulation$t))

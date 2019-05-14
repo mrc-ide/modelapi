@@ -9,7 +9,7 @@
 ##' @title Run model
 ##' @param inputs Opaque list of inputs
 ##' @export
-run_model <- function(inputs) {
+model_run <- function(inputs) {
   time <- inputs$parameters$time
   poll <- inputs$parameters$poll
 
