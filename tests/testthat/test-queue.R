@@ -15,12 +15,15 @@ test_that("basic queue operation", {
   expect_equal(s1$queue, 0L)
   expect_false(s1$done)
 
-  queue$task_wait(id, timeout = 2)
+  queue$task_wait(id, timeout = 2, progress = FALSE)
   s2 <- model_queue_status(id, queue = queue)
   expect_equal(s2$status, "COMPLETE")
   expect_true(s2$success)
   expect_null(s2$queue, 0L)
   expect_true(s2$done)
+
+  res <- model_queue_result(id, queue = queue)
+  expect_setequal(names(res), c("fitted", "simulation"))
 })
 
 
@@ -49,4 +52,28 @@ test_that("queue length", {
   ## transactional tricks
   model_queue_remove(id2, queue = queue)
   expect_equal(model_queue_status(id3, queue = queue)$queue, 3)
+})
+
+
+test_that("global queue", {
+  queue <- model_queue_start(tempfile(), workers = 0, global = TRUE)
+  expect_identical(queue, cache$queue)
+  model_queue_stop()
+  expect_null(cache$queue)
+})
+
+
+test_that("worker cleanup", {
+  skip_on_os("windows")
+  queue <- model_queue_start(tempfile(), workers = 1, global = FALSE)
+
+  info <- queue$worker_info()[[1]]
+  handle <- ps::ps_handle(info$pid)
+  expect_true(ps::ps_is_running(handle))
+
+  rm(queue)
+  gc()
+  Sys.sleep(1)
+
+  expect_false(ps::ps_is_running(handle))
 })

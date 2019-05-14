@@ -17,5 +17,6 @@ Imports:
     context,
     rrq
 Suggests:
+    ps,
     testthat
 RoxygenNote: 6.1.1

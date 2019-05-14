@@ -13,10 +13,7 @@ model_queue_start <- function(root, workers = 2, name = "modelapi",
     rrq <- rrq::rrq_controller(ctx, con)
     if (workers > 0L) {
       rrq::worker_spawn(rrq, workers)
-      reg.finalizer(rrq, function(e) {
-        message("Stopping workers")
-        rrq$worker_stop()
-      })
+      reg.finalizer(rrq, model_queue_finalize)
     }
 
     if (!global) {
@@ -62,7 +59,17 @@ model_queue_remove <- function(id, queue = cache$queue) {
 
 ## Not part of the api exposed functions, used in tests
 model_queue_stop <- function(queue = cache$queue) {
+  global <- identical(queue, cache$queue)
   queue$destroy(delete = TRUE)
+  if (global) {
+    cache$queue <- NULL
+  }
+}
+
+
+model_queue_finalize <- function(queue) {
+  message("Stopping workers")
+  queue$worker_stop()
 }
 
 
