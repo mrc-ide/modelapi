@@ -13,6 +13,9 @@ Description: A fake model, exposed as an API.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports:
+    context,
+    rrq
 Suggests:
     testthat
 RoxygenNote: 6.1.1
