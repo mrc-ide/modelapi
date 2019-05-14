@@ -37,7 +37,7 @@ model_queue_status <- function(id, queue = cache$queue) {
     list(done = TRUE,
          status = status,
          success = status == "COMPLETE",
-         queue = NULL)
+         queue = 0)
   } else {
     list(done = FALSE,
          status = status,

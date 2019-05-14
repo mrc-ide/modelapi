@@ -7,7 +7,8 @@
 validate_inputs(csv_data, parameters)
 }
 \arguments{
-\item{csv_data}{A string representing a csv file}
+\item{csv_data}{A string (or vector of strings) representing a csv
+file}
 
 \item{parameters}{A list of parameters}
 }

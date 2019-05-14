@@ -19,7 +19,7 @@ test_that("basic queue operation", {
   s2 <- model_queue_status(id, queue = queue)
   expect_equal(s2$status, "COMPLETE")
   expect_true(s2$success)
-  expect_null(s2$queue, 0L)
+  expect_equal(s2$queue, 0L)
   expect_true(s2$done)
 
   res <- model_queue_result(id, queue = queue)

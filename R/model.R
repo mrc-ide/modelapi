@@ -34,7 +34,10 @@ model_run <- function(inputs) {
 
 ##' Validate model inputs
 ##' @title Validate model inputs
-##' @param csv_data A string representing a csv file
+##'
+##' @param csv_data A string (or vector of strings) representing a csv
+##'   file
+##'
 ##' @param parameters A list of parameters
 validate_inputs <- function(csv_data, parameters) {
   expected <- c("a", "b", "time", "poll")
