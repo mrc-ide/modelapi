@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run --rm -d --name modelapi_redis -p 6379:6379 redis
