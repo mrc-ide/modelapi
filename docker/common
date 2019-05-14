@@ -1,0 +1,12 @@
+PACKAGE_ROOT=$(realpath $HERE/..)
+PACKAGE_NAME=$(grep '^Package:' "${PACKAGE_ROOT}/DESCRIPTION"  | \
+                   sed 's/.*: *//')
+
+GIT_SHA=$(git -C "$PACKAGE_ROOT" rev-parse --short=7 HEAD)
+GIT_BRANCH=$(git -C "$PACKAGE_ROOT" symbolic-ref --short HEAD)
+if [ $GIT_BRANCH == "master" ]; then
+   GIT_BRANCH="latest"
+fi
+
+TAG_SHA="mrcide/${PACKAGE_NAME}:${GIT_SHA}"
+TAG_BRANCH="mrcide/${PACKAGE_NAME}:${GIT_BRANCH}"

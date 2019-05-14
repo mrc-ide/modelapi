@@ -1,19 +1,7 @@
 #!/usr/bin/env bash
 set -e
 HERE=$(dirname $0)
-PACKAGE_ROOT=$(realpath $HERE/..)
-PACKAGE_NAME=$(grep '^Package:' "${PACKAGE_ROOT}/DESCRIPTION"  | \
-                   sed 's/.*: *//')
-
-GIT_SHA=$(git rev-parse --short=7 HEAD)
-GIT_BRANCH=$(git symbolic-ref --short HEAD)
-if [ $GIT_BRANCH == "master" ]; then
-   GIT_BRANCH="latest"
-fi
-
-TAG_SHA="mrcide/${PACKAGE_NAME}:${GIT_SHA}"
-TAG_BRANCH="mrcide/${PACKAGE_NAME}:${GIT_BRANCH}"
-
+. $HERE/common
 docker build \
        -f docker/Dockerfile \
        -t "$TAG_SHA" \

@@ -18,3 +18,5 @@ RUN install_packages --repo=https://mrc-ide.github.io/drat \
 
 COPY . /src
 RUN R CMD INSTALL /src
+
+ENTRYPOINT ["/src/inst/entrypoint.R"]
