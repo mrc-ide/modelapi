@@ -11,6 +11,7 @@ COPY docker/bin /usr/local/bin/
 
 RUN install_packages --repo=https://mrc-ide.github.io/drat \
         context \
+        plumber \
         ps \
         rrq \
         testthat
